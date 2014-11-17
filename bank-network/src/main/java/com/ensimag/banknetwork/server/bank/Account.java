@@ -7,6 +7,11 @@ import java.util.UUID;
 
 public class Account implements IAccount {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5778538615219571623L;
+	
 	public static int INIT_CASH = 100;
 	public static int INIT_ALLOWED_OVERDRAW = 0;
 	
@@ -50,4 +55,22 @@ public class Account implements IAccount {
 		return (allowedOverdraw = overdraw);
 	}
 
+	@Override
+	public int hashCode() {
+	    return (int) (accountNumber % Integer.MAX_VALUE);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    final IAccount other = (IAccount) obj;
+	    if (accountNumber != other.getAccountNumber())
+	        return false;
+	    return true;
+	}
 }
